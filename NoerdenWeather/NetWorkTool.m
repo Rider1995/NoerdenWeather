@@ -55,4 +55,50 @@
     }
 }
 
+#pragma mark - 基础的post网络请求方法，所有网络请求的公共方法
+/**
+ 基础的post网络请求方法
+ 
+ @param urlStr url连接
+ @param parametersDic 参数字典
+ @param callback 返回值
+ */
++(void)POSTRequestWith:(NSString*)urlStr withParameters:(NSDictionary*)parametersDic withCallback:(Callback)callback
+{
+    [self PublicMethodRequestWith:urlStr
+                   withParameters:(NSDictionary*)parametersDic
+                         withType:@"POST"
+                     withCallback:^(BOOL success, NSError *error, id result)
+     {
+         if (success)
+         {
+             callback(YES,nil,result);
+         }
+         else
+         {
+             callback(NO,nil,result);
+         }
+     }];
+}
+
+#pragma mark - 基础的get网络请求方法
+
++(void)GETRequestWith:(NSString*)urlStr withParameters:(NSDictionary*)parametersDic withCallback:(Callback)callback
+{
+    [self PublicMethodRequestWith:urlStr
+                   withParameters:(NSDictionary*)parametersDic
+                         withType:@"GET"
+                     withCallback:^(BOOL success, NSError *error, id result)
+     {
+         if (success)
+         {
+             callback(YES,nil,result);
+         }
+         else
+         {
+             callback(NO,nil,result);
+         }
+     }];
+}
+
 @end
