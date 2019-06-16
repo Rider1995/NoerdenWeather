@@ -4,5 +4,8 @@ target 'NoerdenWeather' do
 pod 'AFNetworking'
 pod 'SDWebImage'
 pod 'Masonry'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
+pod 'MJExtension'
 
 end

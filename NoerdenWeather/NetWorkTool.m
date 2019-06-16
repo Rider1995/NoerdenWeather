@@ -22,23 +22,22 @@
     AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
     ((AFJSONResponseSerializer *)manager.responseSerializer).removesKeysWithNullValues = YES;//移除null的字符串
     [manager.requestSerializer setTimeoutInterval:15];//15秒超时
-    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers];//允许返回的结果可改
-    
-    //    [manager.requestSerializer setValue:signStr forHTTPHeaderField:@"Signature"];
-    
-    
-    //设置请求内容的类型
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer=[AFHTTPResponseSerializer serializer];
+    [AFJSONResponseSerializer serializer].acceptableContentTypes = [NSSet setWithObject:@"text/json"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     if ([requestType isEqualToString:@"GET"])
     {
         [manager GET:urlStr parameters:parametersDic progress:^(NSProgress * _Nonnull downloadProgress) {
             
         }success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-            callback(YES,nil,responseObject);
+            NSString  * receive = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding ];
+            NSData *data = [receive dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            callback(YES,nil,dict);
         }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
             NSLog(@"%@",error);
-            callback(NO,nil,error);
+            callback(NO,error,nil);
         }];
     }
     
@@ -47,7 +46,10 @@
         [manager POST:urlStr parameters:parametersDic progress:^(NSProgress * _Nonnull uploadProgress)
          {
          }success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
-             callback(YES,nil,responseObject);
+             NSString  * receive = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding ];
+             NSData *data = [receive dataUsingEncoding:NSUTF8StringEncoding];
+             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+             callback(YES,nil,dict);
          }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
              NSLog(@"%@",error);
              callback(NO,error,nil);
@@ -76,7 +78,7 @@
          }
          else
          {
-             callback(NO,nil,result);
+             callback(NO,error,result);
          }
      }];
 }
@@ -92,11 +94,11 @@
      {
          if (success)
          {
-             callback(YES,nil,result);
+             callback(YES,error,result);
          }
          else
          {
-             callback(NO,nil,result);
+             callback(NO,error,result);
          }
      }];
 }
