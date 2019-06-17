@@ -58,14 +58,38 @@
 
 
 -(void)getWeatherWithIndex:(NSInteger )index{
-    [NetWorkTool GETRequestWith:@"https://api.weather.gov/gridpoints/LOT/84,56/forecast" withParameters:@{} withCallback:^(BOOL success, NSError * _Nonnull error, id  _Nonnull result) {
+    
+    
+    
+    NSMutableString *url = [[NSMutableString alloc]initWithString:@"https://api.weather.gov/gridpoints"];
+    switch (index) {
+        case 0:
+            [url appendString:@"/LOT/84,56/forecast"];
+                  self.googleMapView.camera = [[GMSCameraPosition alloc] initWithTarget:CLLocationCoordinate2DMake(41.876009, -87.629595) zoom:15 bearing:0 viewingAngle:0];
+            break;
+        case 1:
+            [url appendString:@"/OKX/32,34/forecast"];
+                              self.googleMapView.camera = [[GMSCameraPosition alloc] initWithTarget:CLLocationCoordinate2DMake(40.709002,-74.005850) zoom:15 bearing:0 viewingAngle:0];
+            break;
+        case 2:
+            [url appendString:@"/PSR/214,41/forecast"];
+            self.googleMapView.camera = [[GMSCameraPosition alloc] initWithTarget:CLLocationCoordinate2DMake(25.762119, -80.193676) zoom:15 bearing:0 viewingAngle:0];
+            break;
+        case 3:
+            [url appendString:@"/MTR/91,112/forecast"];
+                        self.googleMapView.camera = [[GMSCameraPosition alloc] initWithTarget:CLLocationCoordinate2DMake(37.773773,-122.420721) zoom:15 bearing:0 viewingAngle:0];
+            break;
+            
+        default:
+            break;
+    }
+    [NetWorkTool GETRequestWith:url withParameters:@{} withCallback:^(BOOL success, NSError * _Nonnull error, id  _Nonnull result) {
         if (success) {
             NoerdenWeatherModel *model = [NoerdenWeatherModel mj_objectWithKeyValues:result];
             WeatherView *weatherView = [[WeatherView alloc]initWithFrame:CGRectMake(0, screenH, screenW, screenH - 100)];
+            weatherView.index = index;
             weatherView.model = model;
             [self.view addSubview:weatherView];
-
-            
         }
     }];
 }

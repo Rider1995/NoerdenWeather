@@ -142,9 +142,24 @@
     
     //Y轴偏移的量
     CGFloat offsetY = currentP.y - preP.y;
-    
+    if (self.superview.frame.origin.y > screenH - 180) {
+        return;
+    }
+    if (self.superview.frame.origin.y < 100) {
+        return;
+    }
     self.superview.transform = CGAffineTransformTranslate(self.superview.transform, 0, offsetY);
+
     
+}
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.superview.frame.origin.y > screenH - 180) {
+        self.superview.frame = CGRectMake(0, screenH - 180, screenW, screenH - 100);
+    }
+    if (self.superview.frame.origin.y < 100) {
+        self.superview.frame = CGRectMake(0, 100, screenW, screenH - 100);
+    }
 }
 
 @end
