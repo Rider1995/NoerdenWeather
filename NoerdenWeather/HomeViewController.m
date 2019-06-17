@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "NoerdenWeatherModel.h"
 #import "CitySelectView.h"
+#import "WeatherView.h"
 
 @interface HomeViewController ()<GMSMapViewDelegate>
 @property(nonatomic,strong) GMSMapView *googleMapView;
@@ -19,12 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-    [self getWeather];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(uploadUserLocation:) name:@"Notify_ChangeUserLocation" object:nil];
 }
 
 -(void)setupUI{
-    GMSMapView *googleMapView = [[GMSMapView alloc] initWithFrame:CGRectMake(0, 0, screenW, screenH - 200)];
+    GMSMapView *googleMapView = [[GMSMapView alloc] initWithFrame:CGRectMake(0, 0, screenW, screenH - 150)];
     self.googleMapView = googleMapView;
     googleMapView.delegate = self;
     googleMapView.indoorEnabled = NO;
@@ -38,13 +38,16 @@
     [self.view insertSubview:googleMapView atIndex:0];
     
     CitySelectView *citySelectView = [[CitySelectView alloc]init];
+    WeakSelf;
+    citySelectView.Callback = ^(NSInteger index) {
+        [weakSelf getWeatherWithIndex:index];
+    };
     [self.view addSubview:citySelectView];
     [citySelectView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.view).offset(-15);
-        make.centerY.equalTo(self.view);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(120);
+        make.leading.trailing.bottom.equalTo(self.view);
+        make.top.equalTo(googleMapView.mas_bottom);
     }];
+    
     
 }
 
@@ -54,11 +57,15 @@
 }
 
 
--(void)getWeather{
+-(void)getWeatherWithIndex:(NSInteger )index{
     [NetWorkTool GETRequestWith:@"https://api.weather.gov/gridpoints/LOT/84,56/forecast" withParameters:@{} withCallback:^(BOOL success, NSError * _Nonnull error, id  _Nonnull result) {
         if (success) {
             NoerdenWeatherModel *model = [NoerdenWeatherModel mj_objectWithKeyValues:result];
-            NSLog(@"1");
+            WeatherView *weatherView = [[WeatherView alloc]initWithFrame:CGRectMake(0, screenH, screenW, screenH - 100)];
+            weatherView.model = model;
+            [self.view addSubview:weatherView];
+
+            
         }
     }];
 }

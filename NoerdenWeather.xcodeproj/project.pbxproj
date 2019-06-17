@@ -12,8 +12,8 @@
 		0FA53A7D22B62673006BBF05 /* SnowEmitterLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA53A7822B62673006BBF05 /* SnowEmitterLayer.m */; };
 		0FA53A8022B659A2006BBF05 /* NoerdenWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA53A7F22B659A2006BBF05 /* NoerdenWeatherModel.m */; };
 		0FA53A8322B65CED006BBF05 /* CitySelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA53A8222B65CED006BBF05 /* CitySelectView.m */; };
+		0FA53A8922B7B40F006BBF05 /* WeatherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA53A8822B7B40F006BBF05 /* WeatherView.m */; };
 		0FB2FCA922B521FA008D5CA3 /* MapServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2FCA822B521FA008D5CA3 /* MapServiceManager.m */; };
-		0FB2FCAC22B623D6008D5CA3 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2FCAB22B623D6008D5CA3 /* WeatherViewController.m */; };
 		0FBB5B7222B5121A003630D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB5B7122B5121A003630D0 /* AppDelegate.m */; };
 		0FBB5B7522B5121A003630D0 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB5B7422B5121A003630D0 /* HomeViewController.m */; };
 		0FBB5B7822B5121A003630D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FBB5B7622B5121A003630D0 /* Main.storyboard */; };
@@ -35,10 +35,10 @@
 		0FA53A7F22B659A2006BBF05 /* NoerdenWeatherModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoerdenWeatherModel.m; sourceTree = "<group>"; };
 		0FA53A8122B65CED006BBF05 /* CitySelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CitySelectView.h; sourceTree = "<group>"; };
 		0FA53A8222B65CED006BBF05 /* CitySelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CitySelectView.m; sourceTree = "<group>"; };
+		0FA53A8722B7B40F006BBF05 /* WeatherView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherView.h; sourceTree = "<group>"; };
+		0FA53A8822B7B40F006BBF05 /* WeatherView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherView.m; sourceTree = "<group>"; };
 		0FB2FCA722B521FA008D5CA3 /* MapServiceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapServiceManager.h; sourceTree = "<group>"; };
 		0FB2FCA822B521FA008D5CA3 /* MapServiceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapServiceManager.m; sourceTree = "<group>"; };
-		0FB2FCAA22B623D6008D5CA3 /* WeatherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
-		0FB2FCAB22B623D6008D5CA3 /* WeatherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		0FBB5B6D22B5121A003630D0 /* NoerdenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoerdenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FBB5B7022B5121A003630D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0FBB5B7122B5121A003630D0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,8 +116,8 @@
 				0FBB5B7122B5121A003630D0 /* AppDelegate.m */,
 				0FBB5B7322B5121A003630D0 /* HomeViewController.h */,
 				0FBB5B7422B5121A003630D0 /* HomeViewController.m */,
-				0FB2FCAA22B623D6008D5CA3 /* WeatherViewController.h */,
-				0FB2FCAB22B623D6008D5CA3 /* WeatherViewController.m */,
+				0FA53A8722B7B40F006BBF05 /* WeatherView.h */,
+				0FA53A8822B7B40F006BBF05 /* WeatherView.m */,
 				0FA53A8122B65CED006BBF05 /* CitySelectView.h */,
 				0FA53A8222B65CED006BBF05 /* CitySelectView.m */,
 				0FA53A7E22B659A2006BBF05 /* NoerdenWeatherModel.h */,
@@ -265,9 +265,9 @@
 				0FA53A7D22B62673006BBF05 /* SnowEmitterLayer.m in Sources */,
 				0FA53A7C22B62673006BBF05 /* CloudEmitterLayer.m in Sources */,
 				0FA53A8022B659A2006BBF05 /* NoerdenWeatherModel.m in Sources */,
+				0FA53A8922B7B40F006BBF05 /* WeatherView.m in Sources */,
 				0FB2FCA922B521FA008D5CA3 /* MapServiceManager.m in Sources */,
 				0FA53A8322B65CED006BBF05 /* CitySelectView.m in Sources */,
-				0FB2FCAC22B623D6008D5CA3 /* WeatherViewController.m in Sources */,
 				0FBB5B7222B5121A003630D0 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

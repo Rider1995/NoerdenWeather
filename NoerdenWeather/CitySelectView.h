@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^CitySelectCallback)(NSInteger index);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CitySelectView : UIView
-
+@property (nonatomic, strong) CitySelectCallback Callback;
 @end
 
 NS_ASSUME_NONNULL_END

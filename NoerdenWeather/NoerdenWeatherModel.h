@@ -50,7 +50,7 @@
 
 @property (nonatomic, strong) Elevation *elevation;
 
-@property (nonatomic, strong) NSArray *periods;
+@property (nonatomic, strong) NSArray<Periods *> *periods;
 
 @property (nonatomic, copy) NSString *units;
 
@@ -68,7 +68,7 @@
 
 @property (nonatomic, copy) NSString *windDirection;
 
-@property (nonatomic, assign) NSInteger temperature;
+@property (nonatomic, copy) NSString *temperature;
 
 @property (nonatomic, copy) NSString *windSpeed;
 
